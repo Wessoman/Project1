@@ -18,13 +18,17 @@ function initMap (){
     lat: 30.2672,
     lng: -97.7431
   };
-  var map = new google.maps.Map(document.getElementById("map"), {zoom: 10, center: austin});
+  var map = new google.maps.Map(document.getElementById("map"), {zoom: 12, center: austin});
   var marker = new google.maps.Marker({position: austin, map: map});
 }
 
 var searchBand;
 var mapBox = $("#map");
 var searchForm = $("#searchForm");
+
+function LinkFormatter(value, row, index) {
+  return "<a href='https://www.google.com/search?q="+value+"' target='_blank'>"+value+"</a>";
+}
 
 $(document).ready(function(){
   mapBox.addClass("d-none");
@@ -50,7 +54,7 @@ database.ref().on("value", function(snapshot){
   var band = snapshot.val().searchBand;
   $("#resultsTable > tbody").append(
     $("<tr>").append(
-      $("<td>").append(band)
+      $("<td>").append(LinkFormatter(band))
     )
   );
 });
