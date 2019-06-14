@@ -9,13 +9,26 @@ var firebaseConfig = {
     appId: "1:1050934926486:web:e9fcdda165569b47"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-  function initMap (){
-    var austin = {
-      lat: 30.2672,
-      lng: -97.7431
-    };
-    var map = new google.maps.Map(document.getElementById("map"), {zoom: 10, center: austin});
-    var marker = new google.maps.Marker({position: austin, map: map});
-  }
+function initMap (){
+  var austin = {
+    lat: 30.2672,
+    lng: -97.7431
+  };
+  var map = new google.maps.Map(document.getElementById("map"), {zoom: 10, center: austin});
+  var marker = new google.maps.Marker({position: austin, map: map});
+}
+
+$(document).ready(function(){
+  var mapBox = $("#map");
+  var searchForm = $("#searchForm");
+  mapBox.addClass("d-none");
+  $("#searchButton").on("click", function(event){
+    event.preventDefault();
+    initMap();
+    mapBox.removeClass("d-none");
+    searchForm.addClass("d-none");
+    $("#searchButton").addClass("d-none");
+  });
+});
