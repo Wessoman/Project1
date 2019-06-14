@@ -1,15 +1,17 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyCcgoGoTHLroUvcnjjfDgPy1sHzyWPAFX8",
-    authDomain: "musicproject1-e582b.firebaseapp.com",
-    databaseURL: "https://musicproject1-e582b.firebaseio.com",
-    projectId: "musicproject1-e582b",
-    storageBucket: "musicproject1-e582b.appspot.com",
-    messagingSenderId: "1050934926486",
-    appId: "1:1050934926486:web:e9fcdda165569b47"
-  };
+  apiKey: "AIzaSyAs7I_Csh8-80JQnVPJA_tiyG9zEkJTOR0",
+  authDomain: "kaquimusic.firebaseapp.com",
+  databaseURL: "https://kaquimusic.firebaseio.com",
+  projectId: "kaquimusic",
+  storageBucket: "",
+  messagingSenderId: "536533706423",
+  appId: "1:536533706423:web:8040afb383cce8e3"
+};
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+var database = firebase.database();
 
 function initMap (){
   var austin = {
@@ -20,15 +22,27 @@ function initMap (){
   var marker = new google.maps.Marker({position: austin, map: map});
 }
 
+var searchBand;
+var mapBox = $("#map");
+var searchForm = $("#searchForm");
+
 $(document).ready(function(){
-  var mapBox = $("#map");
-  var searchForm = $("#searchForm");
   mapBox.addClass("d-none");
-  $("#searchButton").on("click", function(event){
-    event.preventDefault();
-    initMap();
-    mapBox.removeClass("d-none");
-    searchForm.addClass("d-none");
-    $("#searchButton").addClass("d-none");
-  });
 });
+
+$("#searchButton").on("click", function(event){
+  event.preventDefault();
+  initMap();
+  mapBox.removeClass("d-none");
+  searchForm.addClass("d-none");
+  $("#searchButton").addClass("d-none");
+  searchBand = $("#bandInput").val();
+  database.ref().set({
+    searchBand: searchBand
+  });
+  console.log(searchBand);
+});
+
+database.ref().on("value", function(snapshot){
+  console.log(snapshot.val());
+})
