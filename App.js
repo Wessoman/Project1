@@ -22,7 +22,7 @@ function initMap (){
   var marker = new google.maps.Marker({position: austin, map: map});
 }
 
-var searchBand;
+var artist;
 var mapBox = $("#map");
 var searchForm = $("#searchForm");
 
@@ -33,20 +33,40 @@ function LinkFormatter(value, row, index) {
 $(document).ready(function(){
   mapBox.addClass("d-none");
   $("#resultsTable").addClass("d-none");
+  $("#lastFM").addClass("d-none");
 });
 
 $("#searchButton").on("click", function(event){
   event.preventDefault();
   initMap();
   mapBox.removeClass("d-none");
-  searchForm.addClass("d-none");
-  $("#searchButton").addClass("d-none");
-  searchBand = $("#bandInput").val();
+  // searchForm.addClass("d-none");
+  // $("#searchButton").addClass("d-none");
+  $("#lastFM").removeClass("d-none");
+  artist = $("#bandInput").val();
+  var lastAPI = "7b47760fe2aa1770bcb7927be1cb9d72";
+  var lastQuery = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artist + "&api_key=" + lastAPI + "&format=json"
+  $.ajax({
+    url: lastQuery,
+    method:"GET"
+  }).then(function(response){
+    console.log(response.artist);
+    var band = response.artist;
+    // var bandImg = $("<img class='card-image-top' alt='searched artist'>");
+    // bandImg.attr("src", band.image["1"]["#text"]);
+    var name = $("<h5 class='card-title'>");
+    var bandDiv = $("<div class='card-body'>");
+    var bandSum = $("<p class='card-text'>");
+    name.append(band.name);
+    bandSum.append(band.bio.summary);
+    bandDiv.append(name, bandSum);
+    $("#lastFM").append(bandDiv);
+  })
   database.ref().set({
-    searchBand: searchBand
+    searchBand: artist
   });
   $("#resultsTable").removeClass("d-none");
-  console.log(searchBand);
+  console.log(artist);
 });
 
 database.ref().on("value", function(snapshot){
@@ -57,4 +77,5 @@ database.ref().on("value", function(snapshot){
       $("<td>").append(LinkFormatter(band))
     )
   );
+  $("#lastFM").empty();
 });
