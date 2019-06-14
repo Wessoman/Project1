@@ -28,6 +28,7 @@ var searchForm = $("#searchForm");
 
 $(document).ready(function(){
   mapBox.addClass("d-none");
+  $("#resultsTable").addClass("d-none");
 });
 
 $("#searchButton").on("click", function(event){
@@ -40,9 +41,16 @@ $("#searchButton").on("click", function(event){
   database.ref().set({
     searchBand: searchBand
   });
+  $("#resultsTable").removeClass("d-none");
   console.log(searchBand);
 });
 
 database.ref().on("value", function(snapshot){
   console.log(snapshot.val());
-})
+  var band = snapshot.val().searchBand;
+  $("#resultsTable > tbody").append(
+    $("<tr>").append(
+      $("<td>").append(band)
+    )
+  );
+});
