@@ -1,0 +1,21 @@
+#map {
+    height: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+body {
+    background-color:#A1A393;
+}
+
+#bandInput{
+    background-color: white;
+    border-radius: 0.25rem;
+}
+
+#results{
+    border-radius: 0.5rem;
+    background-color: white;
+    height: 85%;
+    padding: 1%;
+}
