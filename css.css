@@ -19,3 +19,7 @@ body {
     height: 85%;
     padding: 1%;
 }
+
+#recentAlbums {
+    display: inline;
+}

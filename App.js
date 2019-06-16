@@ -33,7 +33,7 @@ function LinkFormatter(value, row, index) {
 
 function lastGet(artist) {
   var lastAPI = "7b47760fe2aa1770bcb7927be1cb9d72";
-  var lastQuery = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artist + "&api_key=" + lastAPI + "&format=json"
+  var lastQuery = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artist + "&api_key=" + lastAPI + "&format=json";
   $.ajax({
     url: lastQuery,
     method:"GET"
@@ -49,6 +49,32 @@ function lastGet(artist) {
     bandSum.append(band.bio.summary);
     bandDiv.append(name, bandSum);
     $("#lastFM").append(bandDiv);
+  });
+}
+
+function discGet(artist) {
+  var discAPI = "nbWzmDGOIWYNqEfTMUMf";
+  var discSecret = "xXsCUsgkVJoNlsefHTBKmLfWKpdcTeAq";
+  var discQuery = "https://api.discogs.com/database/search?artist=" + artist + "&key=" + discAPI + "&secret=" + discSecret;
+  $.ajax({
+    url: discQuery,
+    method: "GET"
+  }).then(function(response){
+    var resultsGet = response.results;
+    var img1 = $("<img src="+resultsGet[0].thumb+" />");
+    var img2 = $("<img src="+resultsGet[1].thumb+" />");
+    var img3 = $("<img src="+resultsGet[2].thumb+" />");
+    var img4 = $("<img src="+resultsGet[3].thumb+" />");
+    var img5 = $("<img src="+resultsGet[4].thumb+" />");
+    var img6 = $("<img src="+resultsGet[5].thumb+" />");
+    $("#recentAlbums").append(
+      $("<div style='display:inline;'>").append(img1),
+      $("<div style='display:inline;'>").append(img2),
+      $("<div style='display:inline;'>").append(img3),
+      $("<div style='display:inline;'>").append(img4),
+      $("<div style='display:inline;'>").append(img5),
+      $("<div style='display:inline;'>").append(img6),
+    );
   })
 }
 
@@ -65,6 +91,7 @@ $("#searchButton").on("click", function(event){
   $("#searchButton").addClass("d-none");
   artist = $("#bandInput").val();
   lastGet(artist);
+  discGet(artist);
   database.ref().set({
     searchBand: artist
   });
@@ -76,6 +103,7 @@ $("#newSearchButton").on("click", function(event){
   event.preventDefault();
   artist = $("#newBandInput").val();
   lastGet(artist);
+  discGet(artist);
   database.ref().set({
     searchBand: artist
   });
