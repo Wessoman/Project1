@@ -23,27 +23,15 @@ function initMap (){
 }
 
 var artist;
-var mapBox = $("#map");
+var results = $("#results");
 var searchForm = $("#searchForm");
+var jumbotron = $("#jumbotron");
 
 function LinkFormatter(value, row, index) {
   return "<a href='https://www.google.com/search?q="+value+"' target='_blank'>"+value+"</a>";
 }
 
-$(document).ready(function(){
-  mapBox.addClass("d-none");
-  $("#resultsTable").addClass("d-none");
-  $("#lastFM").addClass("d-none");
-});
-
-$("#searchButton").on("click", function(event){
-  event.preventDefault();
-  initMap();
-  mapBox.removeClass("d-none");
-  // searchForm.addClass("d-none");
-  // $("#searchButton").addClass("d-none");
-  $("#lastFM").removeClass("d-none");
-  artist = $("#bandInput").val();
+function lastGet(artist) {
   var lastAPI = "7b47760fe2aa1770bcb7927be1cb9d72";
   var lastQuery = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artist + "&api_key=" + lastAPI + "&format=json"
   $.ajax({
@@ -62,6 +50,21 @@ $("#searchButton").on("click", function(event){
     bandDiv.append(name, bandSum);
     $("#lastFM").append(bandDiv);
   })
+}
+
+$(document).ready(function(){
+  results.addClass("d-none");
+});
+
+$("#searchButton").on("click", function(event){
+  event.preventDefault();
+  initMap();
+  jumbotron.addClass("d-none");
+  results.removeClass("d-none");
+  searchForm.addClass("d-none");
+  $("#searchButton").addClass("d-none");
+  artist = $("#bandInput").val();
+  lastGet(artist);
   database.ref().set({
     searchBand: artist
   });
@@ -69,12 +72,21 @@ $("#searchButton").on("click", function(event){
   console.log(artist);
 });
 
+$("#newSearchButton").on("click", function(event){
+  event.preventDefault();
+  artist = $("#newBandInput").val();
+  lastGet(artist);
+  database.ref().set({
+    searchBand: artist
+  });
+});
+
 database.ref().on("value", function(snapshot){
   console.log(snapshot.val());
   var band = snapshot.val().searchBand;
   $("#resultsTable > tbody").append(
-    $("<tr>").append(
-      $("<td>").append(LinkFormatter(band))
+    $("<tr>").prepend(
+      $("<td>").prepend(LinkFormatter(band))
     )
   );
   $("#lastFM").empty();

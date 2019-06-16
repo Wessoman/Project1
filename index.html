@@ -16,21 +16,14 @@
     <link rel="stylesheet" type="text/css" href="css.css">
     <link rel="stylesheet" type="text/css" href="hover.css">
     <link rel="stylesheet" type="text/css" href="hover-min.css">
-    <!-- Test style for Googlemaps probable delete-->
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center" id="jumbotron">
         <h1 class="display-4">Kaqui!</h1>
         <p class="lead">This is a cool music app</p>
     </div>
+    <br/>
     <div class="container d-flex justify-content-center">
         <form class="form-inline d-flex align-self-center">
             <div class="form-group mb-2" id="searchForm">
@@ -51,6 +44,12 @@
                     </thead>
                     <tbody></tbody>
                 </table>
+                <form class="form-inline d-flex align-self-center">
+                    <div class="form-group mb-2" id="newSearchForm">
+                        <input type="text" class="form-control-plaintext" id="newBandInput" placeholder="Search for an artist!">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2" id="newSearchButton">Search</button>
+                </form>
             </div>
             <div class="col-4">
                 <div class="card" id="lastFM"></div>
