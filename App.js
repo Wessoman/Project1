@@ -33,7 +33,7 @@ function LinkFormatter(value, row, index) {
 
 function lastGet(artist) {
   var lastAPI = "7b47760fe2aa1770bcb7927be1cb9d72";
-  var lastQuery = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artist + "&api_key=" + lastAPI + "&format=json"
+  var lastQuery = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artist + "&api_key=" + lastAPI + "&format=json";
   $.ajax({
     url: lastQuery,
     method:"GET"
@@ -49,7 +49,7 @@ function lastGet(artist) {
     bandSum.append(band.bio.summary);
     bandDiv.append(name, bandSum);
     $("#lastFM").append(bandDiv);
-  })
+  });
 }
 
 $(document).ready(function(){
