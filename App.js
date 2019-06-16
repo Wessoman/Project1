@@ -52,6 +52,32 @@ function lastGet(artist) {
   });
 }
 
+function discGet(artist) {
+  var discAPI = "nbWzmDGOIWYNqEfTMUMf";
+  var discSecret = "xXsCUsgkVJoNlsefHTBKmLfWKpdcTeAq";
+  var discQuery = "https://api.discogs.com/database/search?artist=" + artist + "&key=" + discAPI + "&secret=" + discSecret;
+  $.ajax({
+    url: discQuery,
+    method: "GET"
+  }).then(function(response){
+    var resultsGet = response.results;
+    var img1 = $("<img src="+resultsGet[0].thumb+" />");
+    var img2 = $("<img src="+resultsGet[1].thumb+" />");
+    var img3 = $("<img src="+resultsGet[2].thumb+" />");
+    var img4 = $("<img src="+resultsGet[3].thumb+" />");
+    var img5 = $("<img src="+resultsGet[4].thumb+" />");
+    var img6 = $("<img src="+resultsGet[5].thumb+" />");
+    $("#recentAlbums").append(
+      $("<div style='display:inline;'>").append(img1),
+      $("<div style='display:inline;'>").append(img2),
+      $("<div style='display:inline;'>").append(img3),
+      $("<div style='display:inline;'>").append(img4),
+      $("<div style='display:inline;'>").append(img5),
+      $("<div style='display:inline;'>").append(img6),
+    );
+  })
+}
+
 $(document).ready(function(){
   results.addClass("d-none");
 });
@@ -65,6 +91,7 @@ $("#searchButton").on("click", function(event){
   $("#searchButton").addClass("d-none");
   artist = $("#bandInput").val();
   lastGet(artist);
+  discGet(artist);
   database.ref().set({
     searchBand: artist
   });
@@ -76,6 +103,7 @@ $("#newSearchButton").on("click", function(event){
   event.preventDefault();
   artist = $("#newBandInput").val();
   lastGet(artist);
+  discGet(artist);
   database.ref().set({
     searchBand: artist
   });
