@@ -5,7 +5,8 @@
 }
 
 body {
-    background-color:#b71c1c;
+    /* color change */
+    background-color:#b71c1c;  
     background: repeating-radial-gradient(black, #D5D2D4 10%, RED 15%);
 
 }
