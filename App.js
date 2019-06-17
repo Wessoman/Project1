@@ -42,8 +42,6 @@ function lastGet(artist) {
   }).then(function(response){
     console.log(response.artist);
     var band = response.artist;
-    // var bandImg = $("<img class='card-image-top' alt='searched artist'>");
-    // bandImg.attr("src", band.image["1"]["#text"]);
     var name = $("<h5 class='card-title'>");
     var bandDiv = $("<div class='card-body'>");
     var bandSum = $("<p class='card-text'>");
@@ -85,6 +83,20 @@ function discGet(artist) {
   });
 }
 
+function photoGet(artist){
+  var query = "https://api.discogs.com/database/search?q=" + artist + "&key=" + discAPI + "&secret=" + discSecret;
+  $.ajax({
+    url: query,
+    method: "GET"
+  }).then(function(response){
+    var res = response.results;
+    console.log(res);
+    var bandImg = $("<img class='card-image-top' alt='searched artist'>");
+    bandImg.attr("src", res[0].cover_image);
+    $("#lastFM").prepend(bandImg);
+  })
+}
+
 // function marketGet(artist) {
 //   var marketQuery = "https://api.discogs.com/marketplace/listings/" + artist + "&key=" +discAPI + "&secret=" +discSecret;
 //   $.ajax({
@@ -107,6 +119,7 @@ $("#searchButton").on("click", function(event){
   searchForm.addClass("d-none");
   $("#searchButton").addClass("d-none");
   artist = $("#bandInput").val();
+  photoGet(artist);
   lastGet(artist);
   discGet(artist);
   // marketGet(artist);
@@ -120,6 +133,7 @@ $("#searchButton").on("click", function(event){
 $("#newSearchButton").on("click", function(event){
   event.preventDefault();
   artist = $("#newBandInput").val();
+  photoGet(artist);
   lastGet(artist);
   discGet(artist);
   // marketGet(artist);
