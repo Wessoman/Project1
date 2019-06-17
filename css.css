@@ -5,7 +5,9 @@
 }
 
 body {
-    background-color:#A1A393;
+    background-color:#b71c1c;
+    background: repeating-radial-gradient(black, #D5D2D4 10%, RED 15%);
+
 }
 
 .title {
@@ -29,6 +31,7 @@ body {
     background-color: white;
     height: 85%;
     padding: 1%;
+    /* background: linear-gradient(green, yellow); */
 }
 
 #recentAlbums {
