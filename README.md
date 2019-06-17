@@ -35,3 +35,14 @@ As an urbanite hipster, I want wo know where my favorite bands are playing and b
 
 Notes:
 Kaqui (kah koo ee) is a silly way of spelling "Kakui~", which means "Oh how cool!" in Japanese.
+
+Pain points:
+
+**FIXED** Uploading ed's code
+work on HTML and children after ed's uploading
+We need BandsInTown's API
+We may abandon the Discogs marketplace
+Check on Ebay's API
+Adding images to the band boxes
+tweak the flexboxes
+
