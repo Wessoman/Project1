@@ -23,6 +23,8 @@ function initMap (){
 }
 
 var artist;
+var discAPI = "nbWzmDGOIWYNqEfTMUMf";
+var discSecret = "xXsCUsgkVJoNlsefHTBKmLfWKpdcTeAq";
 var results = $("#results");
 var searchForm = $("#searchForm");
 var jumbotron = $("#jumbotron");
@@ -53,30 +55,45 @@ function lastGet(artist) {
 }
 
 function discGet(artist) {
-  var discAPI = "nbWzmDGOIWYNqEfTMUMf";
-  var discSecret = "xXsCUsgkVJoNlsefHTBKmLfWKpdcTeAq";
   var discQuery = "https://api.discogs.com/database/search?artist=" + artist + "&key=" + discAPI + "&secret=" + discSecret;
   $.ajax({
     url: discQuery,
     method: "GET"
   }).then(function(response){
     var resultsGet = response.results;
+    console.log(resultsGet);
     var img1 = $("<img src="+resultsGet[0].thumb+" />");
     var img2 = $("<img src="+resultsGet[1].thumb+" />");
     var img3 = $("<img src="+resultsGet[2].thumb+" />");
     var img4 = $("<img src="+resultsGet[3].thumb+" />");
     var img5 = $("<img src="+resultsGet[4].thumb+" />");
     var img6 = $("<img src="+resultsGet[5].thumb+" />");
+    var title1 = $("<p class='title'>"+resultsGet[0].title+"</p>");
+    var title2 = $("<p class='title'>"+resultsGet[1].title+"</p>");
+    var title3 = $("<p class='title'>"+resultsGet[2].title+"</p>");
+    var title4 = $("<p class='title'>"+resultsGet[3].title+"</p>");
+    var title5 = $("<p class='title'>"+resultsGet[4].title+"</p>");
+    var title6 = $("<p class='title'>"+resultsGet[5].title+"</p>");
     $("#recentAlbums").append(
-      $("<div style='display:inline;'>").append(img1),
-      $("<div style='display:inline;'>").append(img2),
-      $("<div style='display:inline;'>").append(img3),
-      $("<div style='display:inline;'>").append(img4),
-      $("<div style='display:inline;'>").append(img5),
-      $("<div style='display:inline;'>").append(img6),
+      $("<div class='albumBox'>").append(img1, title1),
+      $("<div class='albumBox'>").append(img2, title2),
+      $("<div class='albumBox'>").append(img3, title3),
+      $("<div class='albumBox'>").append(img4, title4),
+      $("<div class='albumBox'>").append(img5, title5),
+      $("<div class='albumBox'>").append(img6, title6),
     );
-  })
+  });
 }
+
+// function marketGet(artist) {
+//   var marketQuery = "https://api.discogs.com/marketplace/listings/" + artist + "&key=" +discAPI + "&secret=" +discSecret;
+//   $.ajax({
+//     url: marketQuery,
+//     method: "GET"
+//   }).then(function(response){
+//     console.log(response);
+//   });
+// }
 
 $(document).ready(function(){
   results.addClass("d-none");
@@ -92,6 +109,7 @@ $("#searchButton").on("click", function(event){
   artist = $("#bandInput").val();
   lastGet(artist);
   discGet(artist);
+  // marketGet(artist);
   database.ref().set({
     searchBand: artist
   });
@@ -104,6 +122,7 @@ $("#newSearchButton").on("click", function(event){
   artist = $("#newBandInput").val();
   lastGet(artist);
   discGet(artist);
+  // marketGet(artist);
   database.ref().set({
     searchBand: artist
   });
@@ -118,4 +137,5 @@ database.ref().on("value", function(snapshot){
     )
   );
   $("#lastFM").empty();
+  $("#recentAlbums").empty();
 });
