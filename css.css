@@ -4,6 +4,15 @@
     margin: 0 auto;
 }
 
+
+body {
+    /* color change */
+    background-color:#b71c1c;  
+    background: repeating-radial-gradient(black, #D5D2D4 10%, RED 15%);
+
+}
+
+
 .title {
     font-size: 0.75rem;
     color: black;
@@ -25,6 +34,7 @@
     background-color: white;
     height: 85%;
     padding: 1%;
+    /* background: linear-gradient(green, yellow); */
 }
 
 #recentAlbums {
