@@ -8,6 +8,17 @@ body {
     background-color:#A1A393;
 }
 
+.title {
+    font-size: 0.75rem;
+    color: black;
+}
+
+.albumBox {
+    display: inline-block;
+    margin: 1%;
+    padding: 0.5%;
+}
+
 #bandInput{
     background-color: white;
     border-radius: 0.25rem;
@@ -21,5 +32,8 @@ body {
 }
 
 #recentAlbums {
-    display: inline;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-content: space-between;
 }
