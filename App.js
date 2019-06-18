@@ -110,38 +110,94 @@ function eventGet(artist){
     showTwoLng = artistGet.events.event[1].longitude;
     showThreeLat = artistGet.events.event[2].latitude;
     showThreeLng = artistGet.events.event[2].longitude;
-    var showOne = new google.maps.LatLng(showOneLat, showOneLng);
-    var showTwo = new google.maps.LatLng(showTwoLat, showTwoLng);
-    var showThree = new google.maps.LatLng(showThreeLat, showThreeLng);
-    var mapOptions = {
-      zoom: 3.5,
-      center: {lat: 40, lng: -100}
-    }
-    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    markerOne = new google.maps.Marker({
-      position: showOne,
-      title: artistGet.events.event[0].venue_name + " " 
-      + artistGet.events.event[0].venue_address + ", " 
+    if ((!showOneLat && !showOneLng) && (!showTwoLat && showTwoLng) && (!showThreeLat && !showThreeLng)){
+      markerOne.setMap(null);
+      markerTwo.setMap(null);
+      markerThree.setMap(null);
+    }else {
+      var showOne = new google.maps.LatLng(showOneLat, showOneLng);
+      var showTwo = new google.maps.LatLng(showTwoLat, showTwoLng);
+      var showThree = new google.maps.LatLng(showThreeLat, showThreeLng);
+      var mapOptions = {
+        zoom: 3.5,
+        center: {lat: 40, lng: -100}
+      }
+      var contentStringOne = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h5>'+artistGet.events.event[0].venue_name+'</h5>'+
+      '<div id="bodyContent">'+
+      '<p>'+artistGet.events.event[0].venue_address + ", " 
       + artistGet.events.event[0].city_name + " "
-      + artistGet.events.event[0].region_name
-    });
-    markerTwo = new google.maps.Marker({
-      position: showTwo,
-      title: artistGet.events.event[1].venue_name + " " 
-      + artistGet.events.event[1].venue_address + ", " 
+      + artistGet.events.event[0].region_name+'</p>'
+      +'<a href='+artistGet.events.event[0].url+' target="_blank">Buy Tickets</a>'+
+      '</div>'+
+      '</div>';
+  
+      var infowindowOne = new google.maps.InfoWindow({
+        content: contentStringOne
+      });
+  
+      var contentStringTwo = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h5>'+artistGet.events.event[1].venue_name+'</h5>'+
+      '<div id="bodyContent">'+
+      '<p>'+artistGet.events.event[1].venue_address + ", " 
       + artistGet.events.event[1].city_name + " "
-      + artistGet.events.event[1].region_name
-    });
-    markerThree = new google.maps.Marker({
-      position: showThree,
-      title: artistGet.events.event[2].venue_name + " " 
-      + artistGet.events.event[2].venue_address + ", " 
+      + artistGet.events.event[1].region_name+'</p>'
+      +'<a href='+artistGet.events.event[1].url+' target="_blank">Buy Tickets</a>'+
+      '</div>'+
+      '</div>';
+  
+      var infowindowTwo = new google.maps.InfoWindow({
+        content: contentStringTwo
+      });
+  
+      var contentStringThree = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h5 id="firstHeading" class="firstHeading">'+artistGet.events.event[2].venue_name+'</h5>'+
+      '<div id="bodyContent">'+
+      '<p>'+artistGet.events.event[2].venue_address + ", " 
       + artistGet.events.event[2].city_name + " "
-      + artistGet.events.event[2].region_name
-    });
-    markerOne.setMap(map);
-    markerTwo.setMap(map);
-    markerThree.setMap(map);
+      + artistGet.events.event[2].region_name+'</p>'
+      +'<a href='+artistGet.events.event[2].url+' target="_blank">Buy Tickets</a>'+
+      '</div>'+
+      '</div>';
+  
+      var infowindowThree = new google.maps.InfoWindow({
+        content: contentStringThree
+      });
+  
+      map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      markerOne = new google.maps.Marker({
+        position: showOne,
+        title: "Show one"
+      });
+      markerTwo = new google.maps.Marker({
+        position: showTwo,
+        title: "Show two"
+      });
+  
+      markerThree = new google.maps.Marker({
+        position: showThree,
+        title: "Show three"
+      });
+      markerOne.setMap(map);
+      markerTwo.setMap(map);
+      markerThree.setMap(map);
+      markerOne.addListener("click", function(){
+        infowindowOne.open(map, markerOne);
+      });
+      markerTwo.addListener("click", function(){
+        infowindowTwo.open(map, markerTwo);
+      });
+      markerThree.addListener("click", function(){
+        infowindowThree.open(map, markerThree);
+      });
+    }
+    
   });
 }
 
@@ -164,6 +220,9 @@ function LinkFormatter(value, row, index) {
     eventGet(value);
     $("#lastFM").empty();
     $("#albums").empty();
+    markerOne.setMap(null);
+    markerTwo.setMap(null);
+    markerThree.setMap(null);
   });
   return tableSearch;
 }
