@@ -235,6 +235,7 @@ $("#searchButton").on("click", function(event){
   event.preventDefault();
   jumbotron.addClass("d-none");
   results.removeClass("d-none");
+  results.addClass("spin");
   searchForm.addClass("d-none");
   $("#searchButton").addClass("d-none");
   artist = $("#bandInput").val();
