@@ -35,3 +35,11 @@ As an urbanite hipster, I want wo know where my favorite bands are playing and b
 
 Notes:
 Kaqui (kah koo ee) is a silly way of spelling "Kakui~", which means "Oh how cool!" in Japanese.
+
+Pain points:
+Making recent albums section look better.
+Adjusting Javascript 
+Styler the containers
+
+**UPDATE**
+MVP Status achieved 6-18 6:15PM Official 1.0b
