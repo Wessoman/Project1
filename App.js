@@ -58,34 +58,32 @@ function discGet(artist) {
   }).then(function(response){
     var resultsGet = response.results;
     console.log(resultsGet);
-    var img1 = $("<img src="+resultsGet[0].thumb+" />");
-    var img2 = $("<img src="+resultsGet[1].thumb+" />");
-    var img3 = $("<img src="+resultsGet[2].thumb+" />");
-    var img4 = $("<img src="+resultsGet[3].thumb+" />");
-    var img5 = $("<img src="+resultsGet[4].thumb+" />");
-    var img6 = $("<img src="+resultsGet[5].thumb+" />");
-    var img7 = $("<img src="+resultsGet[6].thumb+" />");
-    var img8 = $("<img src="+resultsGet[7].thumb+" />");
-    var img9 = $("<img src="+resultsGet[8].thumb+" />");
-    var img0 = $("<img src="+resultsGet[9].thumb+" />");
+    var img1 = $("<img src="+resultsGet[0].cover_image+" style='width:250px;height:250px;'/>");
+    var img2 = $("<img src="+resultsGet[1].cover_image+" style='width:250px;height:250px;'/>");
+    var img3 = $("<img src="+resultsGet[2].cover_image+" style='width:250px;height:250px;'/>");
+    var img4 = $("<img src="+resultsGet[3].cover_image+" style='width:250px;height:250px;'/>");
+    // var img5 = $("<img src="+resultsGet[4].cover_image+" />");
+    // var img6 = $("<img src="+resultsGet[5].cover_image+" />");
+    // var img7 = $("<img src="+resultsGet[6].cover_image+" />");
+    // var img8 = $("<img src="+resultsGet[7].cover_image+" />");
     var title1 = $("<p class='title'>"+resultsGet[0].title+"</p>");
     var title2 = $("<p class='title'>"+resultsGet[1].title+"</p>");
     var title3 = $("<p class='title'>"+resultsGet[2].title+"</p>");
     var title4 = $("<p class='title'>"+resultsGet[3].title+"</p>");
-    var title5 = $("<p class='title'>"+resultsGet[4].title+"</p>");
-    var title6 = $("<p class='title'>"+resultsGet[5].title+"</p>");
-    var title7 = $("<p class='title'>"+resultsGet[6].title+"</p>");
-    var title8 = $("<p class='title'>"+resultsGet[7].title+"</p>");
+    // var title5 = $("<p class='title'>"+resultsGet[4].title+"</p>");
+    // var title6 = $("<p class='title'>"+resultsGet[5].title+"</p>");
+    // var title7 = $("<p class='title'>"+resultsGet[6].title+"</p>");
+    // var title8 = $("<p class='title'>"+resultsGet[7].title+"</p>");
 
     $("#albums").append(
       $("<div class='albumBox'>").append(img1, title1),
       $("<div class='albumBox'>").append(img2, title2),
       $("<div class='albumBox'>").append(img3, title3),
       $("<div class='albumBox'>").append(img4, title4),
-      $("<div class='albumBox'>").append(img5, title5),
-      $("<div class='albumBox'>").append(img6, title6),
-      $("<div class='albumBox'>").append(img7, title7),
-      $("<div class='albumBox'>").append(img8, title8),
+      // $("<div class='albumBox'>").append(img5, title5),
+      // $("<div class='albumBox'>").append(img6, title6),
+      // $("<div class='albumBox'>").append(img7, title7),
+      // $("<div class='albumBox'>").append(img8, title8),
     );
   });
 }
