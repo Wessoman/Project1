@@ -30,7 +30,15 @@ var searchForm = $("#searchForm");
 var jumbotron = $("#jumbotron");
 
 function LinkFormatter(value, row, index) {
-  return "<a href='https://www.google.com/search?q="+value+"' target='_blank'>"+value+"</a>";
+  var tableSearch = $("<div id='tableSearch'>"+value+"</div>");
+  tableSearch.on("click", function(){
+    lastGet(value);
+    photoGet(value);
+    discGet(value);
+    $("#lastFM").empty();
+    $("#albums").empty();
+  });
+  return tableSearch;
 }
 
 function lastGet(artist) {
