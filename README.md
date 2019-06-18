@@ -37,9 +37,12 @@ Notes:
 Kaqui (kah koo ee) is a silly way of spelling "Kakui~", which means "Oh how cool!" in Japanese.
 
 Pain points:
-Making recent albums section look better.
-Adjusting Javascript 
-Styler the containers
 
-**UPDATE**
-MVP Status achieved 6-18 6:15PM Official 1.0b
+**FIXED** Uploading ed's code
+work on HTML and children after ed's uploading
+We need BandsInTown's API
+We may abandon the Discogs marketplace
+Check on Ebay's API
+Adding images to the band boxes
+tweak the flexboxes
+
