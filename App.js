@@ -64,12 +64,19 @@ function discGet(artist) {
     var img4 = $("<img src="+resultsGet[3].thumb+" />");
     var img5 = $("<img src="+resultsGet[4].thumb+" />");
     var img6 = $("<img src="+resultsGet[5].thumb+" />");
+    var img7 = $("<img src="+resultsGet[6].thumb+" />");
+    var img8 = $("<img src="+resultsGet[7].thumb+" />");
+    var img9 = $("<img src="+resultsGet[8].thumb+" />");
+    var img0 = $("<img src="+resultsGet[9].thumb+" />");
     var title1 = $("<p class='title'>"+resultsGet[0].title+"</p>");
     var title2 = $("<p class='title'>"+resultsGet[1].title+"</p>");
     var title3 = $("<p class='title'>"+resultsGet[2].title+"</p>");
     var title4 = $("<p class='title'>"+resultsGet[3].title+"</p>");
     var title5 = $("<p class='title'>"+resultsGet[4].title+"</p>");
     var title6 = $("<p class='title'>"+resultsGet[5].title+"</p>");
+    var title7 = $("<p class='title'>"+resultsGet[6].title+"</p>");
+    var title8 = $("<p class='title'>"+resultsGet[7].title+"</p>");
+
     $("#albums").append(
       $("<div class='albumBox'>").append(img1, title1),
       $("<div class='albumBox'>").append(img2, title2),
@@ -77,6 +84,8 @@ function discGet(artist) {
       $("<div class='albumBox'>").append(img4, title4),
       $("<div class='albumBox'>").append(img5, title5),
       $("<div class='albumBox'>").append(img6, title6),
+      $("<div class='albumBox'>").append(img7, title7),
+      $("<div class='albumBox'>").append(img8, title8),
     );
   });
 }
@@ -201,15 +210,49 @@ function eventGet(artist){
   });
 }
 
-// function marketGet(artist) {
-//   var marketQuery = "https://api.discogs.com/marketplace/listings/" + artist + "&key=" +discAPI + "&secret=" +discSecret;
-//   $.ajax({
-//     url: marketQuery,
-//     method: "GET"
-//   }).then(function(response){
-//     console.log(response);
-//   });
-// }
+function marketGet(artist) {
+  var ebayAPI = "Anderson-Kaqui-PRD-651f9ce73-a5406c93";
+  var ebayQuery = "https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME="+ebayAPI+"&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords="+artist;
+  $.ajax({
+    url: ebayQuery,
+    method: "GET"
+  }).then(function(response){
+    var ebayParse = JSON.parse(response);
+    var ebay = ebayParse.findItemsByKeywordsResponse;
+    var ebayListing = ebay[0].searchResult[0].item;
+    console.log(ebayListing[0]);
+    var marketCard1 = $("<div class='card' id='card1'>");
+    var img1 = $("<img src="+ebayListing[0].galleryURL[0]+" class='card-img-top'/>");
+    var title1 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[0].title[0]+"</h5>");
+    var link1 = $("<p class='card-text'><a href="+ebayListing[0].viewItemURL[0]+">Buy on Ebay</a></p>");
+    var marketCard2 = $("<div class='card' id='card2'>");
+    var img2 = $("<img src="+ebayListing[1].galleryURL[0]+" class='card-img-top'/>");
+    var title2 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[1].title[0]+"</h5>");
+    var link2 = $("<p class='card-text'><a href="+ebayListing[1].viewItemURL[0]+">Buy on Ebay</a></p>");
+    var marketCard3 = $("<div class='card' id='card3'>");
+    var img3 = $("<img src="+ebayListing[2].galleryURL[0]+" class='card-img-top'/>");
+    var title3 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[2].title[0]+"</h5>");
+    var link3 = $("<p class='card-text'><a href="+ebayListing[2].viewItemURL[0]+">Buy on Ebay</a></p>");
+    var marketCard4 = $("<div class='card' id='card3'>");
+    var img4 = $("<img src="+ebayListing[3].galleryURL[0]+" class='card-img-top'/>");
+    var title4 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[3].title[0]+"</h5>");
+    var link4 = $("<p class='card-text'><a href="+ebayListing[2].viewItemURL[0]+">Buy on Ebay</a></p>");
+    $("#market").append(
+      marketCard1.append(img1, 
+        $("<div class='card-body'>").append(title1, link1)
+      ),
+      marketCard2.append(img2,
+        $("<div class='card-body'>").append(title2, link2)
+      ),
+      marketCard3.append(img3,
+        $("<div class='card-body'>").append(title3, link3)
+      ),
+      marketCard4.append(img4,
+        $("<div class='card-body'>").append(title4, link4)
+      )
+    );
+  });
+}
 
 function LinkFormatter(value, row, index) {
   var tableSearch = $("<div id='tableSearch'>"+value+"</div>");
@@ -218,8 +261,10 @@ function LinkFormatter(value, row, index) {
     photoGet(value);
     discGet(value);
     eventGet(value);
+    marketGet(value);
     $("#lastFM").empty();
     $("#albums").empty();
+    $("#market").empty();
     markerOne.setMap(null);
     markerTwo.setMap(null);
     markerThree.setMap(null);
@@ -243,7 +288,7 @@ $("#searchButton").on("click", function(event){
   lastGet(artist);
   discGet(artist);
   eventGet(artist);
-  // marketGet(artist);
+  marketGet(artist);
   database.ref().set({
     searchBand: artist
   });
@@ -258,7 +303,7 @@ $("#newSearchButton").on("click", function(event){
   lastGet(artist);
   discGet(artist);
   eventGet(artist);
-  // marketGet(artist);
+  marketGet(artist);
   database.ref().set({
     searchBand: artist
   });
@@ -274,4 +319,5 @@ database.ref().on("value", function(snapshot){
   );
   $("#lastFM").empty();
   $("#albums").empty();
+  $("#market").empty();
 });
