@@ -111,12 +111,16 @@ function eventGet(artist){
   }).then(function(response){
     var artistGet = JSON.parse(response);
     console.log(artistGet.events.event);
+
     showOneLat = artistGet.events.event[0].latitude;
     showOneLng = artistGet.events.event[0].longitude;
+
     showTwoLat = artistGet.events.event[1].latitude;
     showTwoLng = artistGet.events.event[1].longitude;
+
     showThreeLat = artistGet.events.event[2].latitude;
     showThreeLng = artistGet.events.event[2].longitude;
+
     if ((!showOneLat && !showOneLng) && (!showTwoLat && showTwoLng) && (!showThreeLat && !showThreeLng)){
       markerOne.setMap(null);
       markerTwo.setMap(null);
@@ -125,10 +129,12 @@ function eventGet(artist){
       var showOne = new google.maps.LatLng(showOneLat, showOneLng);
       var showTwo = new google.maps.LatLng(showTwoLat, showTwoLng);
       var showThree = new google.maps.LatLng(showThreeLat, showThreeLng);
+
       var mapOptions = {
         zoom: 3.5,
         center: {lat: 40, lng: -100}
       }
+
       var contentStringOne = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
@@ -178,10 +184,12 @@ function eventGet(artist){
       });
   
       map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
       markerOne = new google.maps.Marker({
         position: showOne,
         title: "Show one"
       });
+
       markerTwo = new google.maps.Marker({
         position: showTwo,
         title: "Show two"
@@ -191,9 +199,11 @@ function eventGet(artist){
         position: showThree,
         title: "Show three"
       });
+
       markerOne.setMap(map);
       markerTwo.setMap(map);
       markerThree.setMap(map);
+
       markerOne.addListener("click", function(){
         infowindowOne.open(map, markerOne);
       });
@@ -216,38 +226,78 @@ function marketGet(artist) {
     method: "GET"
   }).then(function(response){
     var ebayParse = JSON.parse(response);
-    console.log(ebayParse);
     var ebay = ebayParse.findItemsAdvancedResponse;
     var ebayListing = ebay[0].searchResult[0].item;
     console.log(ebayListing[0]);
+
     var marketCard1 = $("<div class='card' id='card1'>");
     var img1 = $("<img src="+ebayListing[0].galleryURL[0]+" class='card-img-top'/>");
     var title1 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[0].title[0]+"</h5>");
     var link1 = $("<p class='card-text'><a href="+ebayListing[0].viewItemURL[0]+">Buy on Ebay</a></p>");
+    
     var marketCard2 = $("<div class='card' id='card2'>");
     var img2 = $("<img src="+ebayListing[1].galleryURL[0]+" class='card-img-top'/>");
     var title2 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[1].title[0]+"</h5>");
     var link2 = $("<p class='card-text'><a href="+ebayListing[1].viewItemURL[0]+">Buy on Ebay</a></p>");
+
     var marketCard3 = $("<div class='card' id='card3'>");
     var img3 = $("<img src="+ebayListing[2].galleryURL[0]+" class='card-img-top'/>");
     var title3 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[2].title[0]+"</h5>");
     var link3 = $("<p class='card-text'><a href="+ebayListing[2].viewItemURL[0]+">Buy on Ebay</a></p>");
+
     var marketCard4 = $("<div class='card' id='card3'>");
     var img4 = $("<img src="+ebayListing[3].galleryURL[0]+" class='card-img-top'/>");
     var title4 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[3].title[0]+"</h5>");
     var link4 = $("<p class='card-text'><a href="+ebayListing[2].viewItemURL[0]+">Buy on Ebay</a></p>");
+
+    var marketCard5 = $("<div class='card' id='card5'>");
+    var img5 = $("<img src="+ebayListing[4].galleryURL[0]+" class='card-img-top'/>");
+    var title5 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[4].title[0]+"</h5>");
+    var link5 = $("<p class='card-text'><a href="+ebayListing[4].viewItemURL[0]+">Buy on Ebay</a></p>");
+
+    var marketCard6 = $("<div class='card' id='card6'>");
+    var img6 = $("<img src="+ebayListing[5].galleryURL[0]+" class='card-img-top'/>");
+    var title6 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[5].title[0]+"</h5>");
+    var link6 = $("<p class='card-text'><a href="+ebayListing[5].viewItemURL[0]+">Buy on Ebay</a></p>");
+
+    var marketCard7 = $("<div class='card' id='card7'>");
+    var img7 = $("<img src="+ebayListing[6].galleryURL[0]+" class='card-img-top'/>");
+    var title7 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[6].title[0]+"</h5>");
+    var link7 = $("<p class='card-text'><a href="+ebayListing[6].viewItemURL[0]+">Buy on Ebay</a></p>");
+
+    var marketCard8 = $("<div class='card' id='card8'>");
+    var img8 = $("<img src="+ebayListing[7].galleryURL[0]+" class='card-img-top'/>");
+    var title8 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[7].title[0]+"</h5>");
+    var link8 = $("<p class='card-text'><a href="+ebayListing[7].viewItemURL[0]+">Buy on Ebay</a></p>");
+
     $("#market").append(
-      marketCard1.append(img1, 
-        $("<div class='card-body'>").append(title1, link1)
+      $("<div class='row' id='marketRow'>").append(
+        marketCard1.append(img1, 
+          $("<div class='card-body'>").append(title1, link1)
+        ),
+        marketCard2.append(img2,
+          $("<div class='card-body'>").append(title2, link2)
+        ),
+        marketCard3.append(img3,
+          $("<div class='card-body'>").append(title3, link3)
+        ),
+        marketCard4.append(img4,
+          $("<div class='card-body'>").append(title4, link4)
+        )
       ),
-      marketCard2.append(img2,
-        $("<div class='card-body'>").append(title2, link2)
-      ),
-      marketCard3.append(img3,
-        $("<div class='card-body'>").append(title3, link3)
-      ),
-      marketCard4.append(img4,
-        $("<div class='card-body'>").append(title4, link4)
+      $("<div class='row' id='marketRow'>").append(
+        marketCard5.append(img5,
+          $("<div class='card-body'>").append(title5, link5)
+        ),
+        marketCard6.append(img6,
+          $("<div class='card-body'>").append(title6, link6)
+        ),
+        marketCard7.append(img7,
+          $("<div class='card-body'>").append(title7, link7)
+        ),
+        marketCard8.append(img8,
+          $("<div class='card-body'>").append(title8, link8)
+        )
       )
     );
   });
@@ -261,9 +311,11 @@ function LinkFormatter(value, row, index) {
     discGet(value);
     eventGet(value);
     marketGet(value);
+
     $("#lastFM").empty();
     $("#albums").empty();
     $("#market").empty();
+
     markerOne.setMap(null);
     markerTwo.setMap(null);
     markerThree.setMap(null);
@@ -279,7 +331,8 @@ $("#searchButton").on("click", function(event){
   event.preventDefault();
   jumbotron.addClass("d-none");
   results.removeClass("d-none");
-  results.addClass("spin");
+  $("body").attr("style", "background-image: linear-gradient(#38261F, #DE987A);");
+  // results.addClass("spin");
   searchForm.addClass("d-none");
   $("#searchButton").addClass("d-none");
   artist = $("#bandInput").val();
@@ -312,7 +365,7 @@ $("#newSearchButton").on("click", function(event){
 database.ref().on("value", function(snapshot){
   console.log(snapshot.val());
   var band = snapshot.val().searchBand;
-  $("#resultsTable > tbody").append(
+  $("#resultsTable > tbody").prepend(
     $("<tr>").prepend(
       $("<td>").prepend(LinkFormatter(band))
     )
