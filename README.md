@@ -51,3 +51,4 @@ tweak the flexboxes
 Spiral out of vortex effect
 **FIXED** Added Favicon
 **FIXED** Marketplace spacing
+Work on the mobile problem
