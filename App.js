@@ -248,7 +248,7 @@ function marketGet(artist) {
     var marketCard4 = $("<div class='card' id='card3'>");
     var img4 = $("<img src="+ebayListing[3].galleryURL[0]+" class='card-img-top'/>");
     var title4 = $("<h5 class='card-title' style='font-size:1rem;'>"+ebayListing[3].title[0]+"</h5>");
-    var link4 = $("<p class='card-text'><a href="+ebayListing[2].viewItemURL[0]+">Buy on Ebay</a></p>");
+    var link4 = $("<p class='card-text'><a href="+ebayListing[3].viewItemURL[0]+">Buy on Ebay</a></p>");
 
     var marketCard5 = $("<div class='card' id='card5'>");
     var img5 = $("<img src="+ebayListing[4].galleryURL[0]+" class='card-img-top'/>");
