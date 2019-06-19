@@ -210,13 +210,14 @@ function eventGet(artist){
 
 function marketGet(artist) {
   var ebayAPI = "Anderson-Kaqui-PRD-651f9ce73-a5406c93";
-  var ebayQuery = "https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME="+ebayAPI+"&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords="+artist;
+  var ebayQuery = "https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME="+ebayAPI+"&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords="+artist+"&categoryId=11233&limit=4";
   $.ajax({
     url: ebayQuery,
     method: "GET"
   }).then(function(response){
     var ebayParse = JSON.parse(response);
-    var ebay = ebayParse.findItemsByKeywordsResponse;
+    console.log(ebayParse);
+    var ebay = ebayParse.findItemsAdvancedResponse;
     var ebayListing = ebay[0].searchResult[0].item;
     console.log(ebayListing[0]);
     var marketCard1 = $("<div class='card' id='card1'>");
