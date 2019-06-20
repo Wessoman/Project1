@@ -6,14 +6,14 @@
 
 
 body {
-    background-color: #38261F;
+    background-color: #FEFAF7;
     font-family: 'Open Sans', sans-serif;
 }
 
 .jumbotron {
     /* background-image: url("assets/pics/200w.gif"); */
-    color: #C3C231;
-    background-color: #38261F;
+    color: #B1444D;
+    background-color: #FEFAF7;
     text-decoration: underline;
     text-shadow: 1.5px 1px black;
     font-weight: bolder;
