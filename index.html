@@ -20,12 +20,26 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css.css">
 
-    <!-- added source links for CsSS effects from https://mdbootstrap.com/education/bootstrap/quick-start/ -->
+    <!-- added source links for CSS effects from https://mdbootstrap.com/education/bootstrap/quick-start/ -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/pics/favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <!-- added source link for Awesome Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
+
+    <!-- The social media icon bar -->
+    <div class="icon-bar">
+        <a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a> 
+        <a href="https://twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a> 
+        <a href="https://www.google.com/" class="google"><i class="fa fa-google"></i></a> 
+        <a href="https://www.linkedin.com/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/" class="youtube"><i class="fa fa-youtube"></i></a> 
+    </div>
+
     <div class="jumbotron text-center" id="jumbotron">
         <h1 class="display-2">Kaqui!</h1>
         <p class="lead">Find your music</p>
@@ -36,7 +50,8 @@
             <div class="form-group mb-2" id="searchForm">
                 <input type="text" class="form-control-plaintext" id="bandInput" placeholder="Search for an artist!">
             </div>
-            <button type="submit" class="btn btn-primary mb-2" id="searchButton">Search</button>
+            <!-- added spinning animation to button with this code "<span class="spinner-grow spinner-grow-sm"></span>" -->
+            <button type="submit" class="btn btn-primary mb-2" id="searchButton">Search<span class="spinner-grow spinner-grow-sm"></span></button>
         </form>
     </div>
     <br />
